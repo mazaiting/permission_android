@@ -4,15 +4,23 @@
 Android 6.0动态权限申请
 
 #### 软件架构
--- app
--- permission
+- app
+
+- permission
     - util
+    
         - PermissionSettingUtil.kt :  跳转应用权限管理页工具类
+        
         - PermissionUtil.kt        :  权限动态申请工具类
+        
     - PermissionDenied.kt          :  权限拒绝注解
+    
     - PermissionNotShow.kt         :  权限不再显示注解
+    
     - Permissions.kt               :  权限列表注解
+    
     - PermissionSucceed.kt         :  权限申请成功注解
+    
 
 #### 使用说明
 1. 在类的上方使用注解@Permissions
@@ -102,7 +110,6 @@ REQUEST_CODE为请求码
     Toast.makeText(this, "权限申请成功!", Toast.LENGTH_SHORT).show()
   }
 ```
-7.
 
 #### 码云特技
 
