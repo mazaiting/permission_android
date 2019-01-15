@@ -5,22 +5,14 @@ Android 6.0动态权限申请
 
 #### 软件架构
 - app
-
 - permission
     - util
-    
         - PermissionSettingUtil.kt :  跳转应用权限管理页工具类
-        
         - PermissionUtil.kt        :  权限动态申请工具类
-        
     - PermissionDenied.kt          :  权限拒绝注解
-    
     - PermissionNotShow.kt         :  权限不再显示注解
-    
     - Permissions.kt               :  权限列表注解
-    
     - PermissionSucceed.kt         :  权限申请成功注解
-    
 
 #### 使用说明
 1. 在类的上方使用注解@Permissions
@@ -110,11 +102,17 @@ REQUEST_CODE为请求码
     Toast.makeText(this, "权限申请成功!", Toast.LENGTH_SHORT).show()
   }
 ```
+7.
 
-#### 码云特技
+#### 相关信息
 
 1. [码云主页](https://gitee.com/mazaiting)
 2. [简书主页](https://www.jianshu.com/u/5d2cb4bfeb15)
 3. [CSDN主页](https://blog.csdn.net/mazaiting)
 4. [Github主页](https://github.com/mazaiting)
 5. Flutter QQ群: 717034802
+![FlutterQQ群](https://images.gitee.com/uploads/images/2019/0115/104203_240a69e0_1199005.png "FlutterQQ群")
+6. 微信公众号： real_x2019
+![微信公众号：凌浩雨](https://images.gitee.com/uploads/images/2019/0115/104253_eccc5a6f_1199005.jpeg "real_x2019")
+7. 打赏
+![打赏](https://test-1256286377.cos.ap-chengdu.myqcloud.com/%E6%94%AF%E4%BB%98%E5%AE%9D.jpg "支付宝")

@@ -1,9 +1,9 @@
 package com.mazaiting.permissiontest
 
 import android.Manifest
+import android.app.AlertDialog
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.mazaiting.log.L
 import com.mazaiting.permission.*
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     // 权限处理
     PermissionUtil.onRequestPermissionsResult(this, requestCode, permissions, grantResults)
   }
-  
+
 //  /**
 //   * 权限拒绝
 //   */

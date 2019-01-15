@@ -7,4 +7,6 @@ package com.mazaiting.permission
  *
  * @param value 请求码
  */
+@Retention(AnnotationRetention.RUNTIME)
+@Target(AnnotationTarget.FUNCTION)
 annotation class PermissionNotShow(val value: Int)
