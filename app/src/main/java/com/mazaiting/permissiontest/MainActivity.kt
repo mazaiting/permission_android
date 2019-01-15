@@ -9,6 +9,7 @@ import com.mazaiting.log.L
 import com.mazaiting.permission.*
 import com.mazaiting.permission.util.PermissionSettingUtil
 import com.mazaiting.permission.util.PermissionUtil
+import com.mazaiting.permission.util.State
 
 /// 待申请的权限
 @Permissions([Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA], MainActivity.REQUEST_CODE)
@@ -46,23 +47,38 @@ class MainActivity : AppCompatActivity() {
 //  }
   
   /**
-   * 权限拒绝
+   * 权限请求结果处理
+   * @param state 权限授权状态
+   * @param permissions 当状态为Succeed时权限列表为空
    */
-  @PermissionDenied(REQUEST_CODE)
-  fun denied() {
-    // 迭代权限
-//    permissions.forEach { permission ->
-//      L.d("MainActivity--denied--$permission")
-//    }
-    // 再次请求权限
-    PermissionUtil.requestPermission(this)
+  @PermissionResult(REQUEST_CODE)
+  fun permissionResult(state: State, permissions: List<String>?) {
+    when (state) {
+      State.DENIED -> // 再次请求权限
+        PermissionUtil.requestPermission(this)
+      State.SUCCESS -> Toast.makeText(this, "权限申请成功!", Toast.LENGTH_SHORT).show()
+      State.NOT_SHOW -> notShow(permissions!!)
+    }
   }
+//
+//  /**
+//   * 权限拒绝
+//   */
+//  @PermissionDenied(REQUEST_CODE)
+//  fun denied() {
+//    // 迭代权限
+////    permissions.forEach { permission ->
+////      L.d("MainActivity--denied--$permission")
+////    }
+//    // 再次请求权限
+//    PermissionUtil.requestPermission(this)
+//  }
   
   /**
    * 点击不再提示后并拒绝
+   * @param permissions 权限列表
    */
-  @PermissionNotShow(REQUEST_CODE)
-  fun notShow(permissions: List<String>) {
+  private fun notShow(permissions: List<String>) {
     val sb = StringBuilder()
     // 迭代读取权限
     permissions.forEach { permission ->
@@ -85,13 +101,13 @@ class MainActivity : AppCompatActivity() {
             .setCancelable(false).show()
   }
   
-  /**
-   * 权限授权成功
-   */
-  @PermissionSucceed(REQUEST_CODE)
-  fun succeed() {
-    L.d("MainActivity--succeed")
-    Toast.makeText(this, "权限申请成功!", Toast.LENGTH_SHORT).show()
-  }
+//  /**
+//   * 权限授权成功
+//   */
+//  @PermissionSucceed(REQUEST_CODE)
+//  fun succeed() {
+//    L.d("MainActivity--succeed")
+//    Toast.makeText(this, "权限申请成功!", Toast.LENGTH_SHORT).show()
+//  }
   
 }

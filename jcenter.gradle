@@ -11,7 +11,7 @@ publish {
   userOrg = 'mazaiting'      //bintray注册的用户名
   groupId = 'com.mazaiting'     //compile引用时的第1部分groupId
   artifactId = 'permission'     //compile引用时的第2部分项目名
-  publishVersion = '1.0.0'    //compile引用时的第3部分版本号
+  publishVersion = '1.0.1'    //compile引用时的第3部分版本号
   desc = 'This is a annotation permission manage library.'//d项目描述
   website = 'https://github.com/mazaiting/permission_android' //github 托管地址
 }

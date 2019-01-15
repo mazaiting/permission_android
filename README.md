@@ -3,6 +3,75 @@
 #### 介绍
 Android 6.0动态权限申请
 
+## v1.1
+v1.0 存在的问题, 使用三个注解(拒绝权限, 不再提示权限, 成功权限)反射Activity类, 若类中方法较多, 则比较影响性能.
+修复方法：
+- 移除PermissionDenied, PermissionNotShow, PermissionSucceed注解, 创建PermissionResult注解
+- PermissionResult注解方法传入形参状态码及权限列表
+- 用户根据状态码处理结果
+
+#### 软件架构
+- app
+- permission
+    - util
+        - PermissionSettingUtil.kt :  跳转应用权限管理页工具类
+        - PermissionUtil.kt        :  权限动态申请工具类
+        - State.kt                 :  权限状态枚举
+    - Permissions.kt               :  权限列表注解
+    - PermissionResult.kt          :  权限授权结果注解
+
+#### 使用说明
+1. 在类的上方使用注解@Permissions
+```
+// 参数一：权限列表； 参数二：请求码
+@Permissions([Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA], MainActivity.REQUEST_CODE)
+class MainActivity : AppCompatActivity() {
+
+}
+```
+2. 并在onCreate方法中添加请求权限方法
+```
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+    // 请求权限
+    PermissionUtil.requestPermission(this)
+  }
+```
+此时在当前页面启动时会请求此相应的权限, 若想要自己处理授权处理结果, 则在onRequestPermissionsResult方法中自己处理即可.
+3. 此步骤开始后为该框架处理权限控制
+在onRequestPermissionsResult方法中添加权限处理方法
+```
+  override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    // 权限处理
+    PermissionUtil.onRequestPermissionsResult(this, requestCode, permissions, grantResults)
+  }
+```
+4. 权限授权结果--PermissionResult注解
+方法名: 自定义
+参数state: 授权状态码, 必须
+参数permissions: 权限列表, state为succeed时权限列表为空, 必须
+REQUEST_CODE为请求码
+```
+  /**
+   * 权限请求结果处理
+   * @param state 权限授权状态
+   * @param permissions 当状态为Succeed时权限列表为空
+   */
+  @PermissionResult(REQUEST_CODE)
+  fun permissionResult(state: State, permissions: List<String>?) {
+    when (state) {
+      State.DENIED -> // 再次请求权限
+        PermissionUtil.requestPermission(this)
+      State.SUCCESS -> Toast.makeText(this, "权限申请成功!", Toast.LENGTH_SHORT).show()
+      State.NOT_SHOW -> notShow(permissions!!)
+    }
+  }
+```
+
+## v1.0
+
 #### 软件架构
 - app
 - permission
@@ -12,7 +81,7 @@ Android 6.0动态权限申请
     - PermissionDenied.kt          :  权限拒绝注解
     - PermissionNotShow.kt         :  权限不再显示注解
     - Permissions.kt               :  权限列表注解
-    - PermissionSucceed.kt         :  权限申请成功注解
+    - PermissionResult.kt         :  权限申请成功注解
 
 #### 使用说明
 1. 在类的上方使用注解@Permissions
@@ -102,7 +171,7 @@ REQUEST_CODE为请求码
     Toast.makeText(this, "权限申请成功!", Toast.LENGTH_SHORT).show()
   }
 ```
-7.
+
 
 #### 相关信息
 
