@@ -113,9 +113,11 @@ REQUEST_CODE为请求码
 5. Flutter QQ群: 717034802
 
 ![FlutterQQ群](https://images.gitee.com/uploads/images/2019/0115/104203_240a69e0_1199005.png "FlutterQQ群")
+
 6. 微信公众号： real_x2019
 
 ![微信公众号：凌浩雨](https://images.gitee.com/uploads/images/2019/0115/104253_eccc5a6f_1199005.jpeg "real_x2019")
+
 7. 打赏
 
 ![打赏](https://test-1256286377.cos.ap-chengdu.myqcloud.com/%E6%94%AF%E4%BB%98%E5%AE%9D.jpg "支付宝")
