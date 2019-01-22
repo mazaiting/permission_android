@@ -6,7 +6,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.mazaiting.log.L
-import com.mazaiting.permission.*
+import com.mazaiting.permission.PermissionResult
+import com.mazaiting.permission.Permissions
 import com.mazaiting.permission.util.PermissionSettingUtil
 import com.mazaiting.permission.util.PermissionUtil
 import com.mazaiting.permission.util.State
@@ -32,19 +33,6 @@ class MainActivity : AppCompatActivity() {
     // 权限处理
     PermissionUtil.onRequestPermissionsResult(this, requestCode, permissions, grantResults)
   }
-
-//  /**
-//   * 权限拒绝
-//   */
-//  @PermissionDenied(REQUEST_CODE)
-//  fun denied(permissions: List<String>) {
-//    // 迭代权限
-//    permissions.forEach { permission ->
-//      L.d("MainActivity--denied--$permission")
-//    }
-//    // 再次请求权限
-//    PermissionUtil.requestPermission(this)
-//  }
   
   /**
    * 权限请求结果处理
@@ -60,19 +48,6 @@ class MainActivity : AppCompatActivity() {
       State.NOT_SHOW -> notShow(permissions!!)
     }
   }
-//
-//  /**
-//   * 权限拒绝
-//   */
-//  @PermissionDenied(REQUEST_CODE)
-//  fun denied() {
-//    // 迭代权限
-////    permissions.forEach { permission ->
-////      L.d("MainActivity--denied--$permission")
-////    }
-//    // 再次请求权限
-//    PermissionUtil.requestPermission(this)
-//  }
   
   /**
    * 点击不再提示后并拒绝
@@ -100,14 +75,5 @@ class MainActivity : AppCompatActivity() {
             }
             .setCancelable(false).show()
   }
-  
-//  /**
-//   * 权限授权成功
-//   */
-//  @PermissionSucceed(REQUEST_CODE)
-//  fun succeed() {
-//    L.d("MainActivity--succeed")
-//    Toast.makeText(this, "权限申请成功!", Toast.LENGTH_SHORT).show()
-//  }
   
 }
